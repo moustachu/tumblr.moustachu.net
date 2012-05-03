@@ -73,6 +73,6 @@ $(document).ready(function() {
 	insert_credit();	
 
 function insert_credit() {
-	$('.sidebar').append('<p class="theme_credit"><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Licence Creative Commons" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png" /></a></p>');
+	$('.sidebar').append('<p class="theme_credit"><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Licence Creative Commons" style="border-width:0" src="http://web124.free.fr/tumblr.moustachu.net/img/cc-licence-w125.png" /></a></p>');
 }
 });
