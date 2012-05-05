@@ -972,8 +972,77 @@ a.credit {
 <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>  
  
 <script type="text/javascript">
-{block:Twitter}$.getJSON("http://twitter.com/statuses/user_timeline/{TwitterUsername}.json?callback=?", function(data) {$(".twitter .twitter_content").html(data[0].text);});{/block:Twitter}
-$(document).ready(function(){$(".scroll").click(function(event){event.preventDefault();var full_url = this.href;var parts = full_url.split("#");var trgt = parts[1];var target_offset = $("#"+trgt).offset();var target_top = target_offset.top;$('html, body').animate({scrollTop:target_top}, 750);});$(".video_post").fitVids();});{block:IfNotInfiniteScroll}$(document).keydown(function(e) {var url = false;if (e.which == 37) {url = $('#prev').attr('href');}else if (e.which == 39) {url = $('#next').attr('href');}if (url) {window.location = url;}});{/block:IfNotInfiniteScroll}$(function(){var $container = $('.posts').css({ opacity: 0 });$container.imagesLoaded(function(){$container.animate({ opacity: 1 });$container.masonry({itemSelector:'{block:IndexPage}.post{/block:IndexPage}{block:PermalinkPage}.post_none{/block:PermalinkPage}',columnWidth: 5,isRTL: true});$('.reload').click(function(){$container.masonry('reload');});});{block:IfInfiniteScrolling}$container.infinitescroll({navSelector:'.pagination',nextSelector:'.pagination a#next',itemSelector: '.load',loading: {img:'http://static.tumblr.com/jw8fmba/D6Pluysct/loading.gif',donetext:''}},function( newElements ) { var $newElems = $( newElements ).css({ opacity: 0 });$newElems.imagesLoaded(function(){$newElems.animate({ opacity: 1 }).addClass('loaded');$(".video_post").fitVids();$container.masonry( 'appended', $newElems, true );});});{/block:IfInfiniteScrolling}});
+
+{block:Twitter}
+	$.getJSON("http://twitter.com/statuses/user_timeline/{TwitterUsername}.json?callback=?", function(data) {$(".twitter .twitter_content").html(data[0].text);});
+{/block:Twitter}
+
+$(document).ready(function(){
+	$(".scroll").click(function(event){
+		event.preventDefault();
+		var full_url = this.href;
+		var parts = full_url.split("#");
+		var trgt = parts[1];
+		var target_offset = $("#"+trgt).offset();
+		var target_top = target_offset.top;
+		
+		$('html, body').animate({scrollTop:target_top}, 750);
+	});
+	
+	$(".video_post").fitVids();
+});
+
+{block:IfNotInfiniteScroll}
+
+	$(document).keydown(function(e) {
+		var url = false;
+		
+		if (e.which == 37) { url = $('#prev').attr('href');} 
+		else if (e.which == 39) { url = $('#next').attr('href');}
+		
+		if (url) {window.location = url;}
+	});
+	
+{/block:IfNotInfiniteScroll}
+
+$(function(){
+	var $container = $('.posts').css({ opacity: 0 });
+	
+	$container.imagesLoaded(function(){
+		$container.animate({ opacity: 1 });
+		$container.masonry({
+			itemSelector:'{block:IndexPage}.post{/block:IndexPage}{block:PermalinkPage}.post_none{/block:PermalinkPage}',
+			columnWidth: 5,
+			isRTL: true
+		});
+		
+		$('.reload').click(function(){
+			$container.masonry('reload');
+		});
+	});
+
+	{block:IfInfiniteScrolling}
+	
+		$container.infinitescroll(
+			{
+				navSelector:'.pagination',
+	    		nextSelector:'.pagination a#next',
+	    		itemSelector: '.load',
+	    		loading: {img:'http://static.tumblr.com/jw8fmba/D6Pluysct/loading.gif',donetext:''}
+	    	},
+			function( newElements ) { 
+				var $newElems = $( newElements ).css({ opacity: 0 });
+				$newElems.imagesLoaded(function(){
+					$newElems.animate({ opacity: 1 }).addClass('loaded');
+					$(".video_post").fitVids();
+					$container.masonry( 'appended', $newElems, true );
+				});
+			});
+			
+	{/block:IfInfiniteScrolling}
+});
+
+
 </script>
 
 </body>
