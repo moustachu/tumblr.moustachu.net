@@ -19,7 +19,7 @@ derived from the untitled theme Stacky Ver. 2.75.2 by Andrew Stichbury
 <link rel="apple-touch-icon" href="{PortraitURL-128}"/>
 
 <!-- image options -->
-<meta name="image:Logo" content="" />
+<meta name="image:Logo" content="http://web124.free.fr/tumblr.moustachu.net/img/moustache_w135.png" />
 <meta name="image:Background" content="" />
 
 <!-- color options -->
@@ -31,7 +31,7 @@ derived from the untitled theme Stacky Ver. 2.75.2 by Andrew Stichbury
 
 <!-- if options -->
 <meta name="if:Show captions on index page" content="0" />
-<meta name="if:Show RSS and Archive in sidebar" content="1" />
+<meta name="if:Show RSS and Archive in sidebar" content="0" />
 <meta name="if:Fixed elements" content="1" />
 <meta name="if:Infinite scroll" content="1" />
 <meta name="if:2 columns" content="0" />
@@ -182,38 +182,7 @@ blockquote {
 	-webkit-border-radius: 4px;
 	outline:none;
 }
-.twitter {
-	width: 125px;
-	margin-top: 20px;
-}
-.twitter .tweet {
-	width: 105px;
-	padding: 10px;
-	background: #FFF;
-	border-bottom: 1px solid #CCC;
-	-moz-border-radius: 2px;
-	-webkit-border-radius: 2px;
-	position: relative;
-	color: #333 !important;
-}
-.twitter .tweet p.content {
-	font-size: 9px;
-	line-height: 14px;
-	margin: 0;
-	overflow: hidden;
-}
-.twitter .arrow {
-	position: absolute;
-	background: url(http://static.tumblr.com/jw8fmba/1x9ltzgzb/arrow.png);
-	width: 16px;
-	height: 8px;
-	left: 14px;
-	bottom: -8px;
-}
-.sidebar .twitter iframe {
-	width: 61px !important;
-	margin: 15px 0 0 5px;
-}
+
 .sidebar p.theme_credit {
 	font-size:10px;
 	text-align:center;
@@ -547,46 +516,28 @@ ol.notes li.note blockquote a {
 	text-decoration: none;
 	margin-right: 5px;
 }
-div.footer {
-	bottom: 0;
-	right: 0;
-	padding: 25px 0;
-	position: absolute;
-	overflow: hidden;
-	{block:If2Columns}
-	width: 520px;
-	{/block:If2Columns}
-	{block:If3Columns}
-	width: 780px;
-	{/block:If3Columns}
-	{block:If4Columns}
-	width: 1040px;
-	{/block:If4Columns}
-	{block:If5Columns}
-	width: 1300px;
-	{/block:If5Columns}
-}
-div.footer a.archive,div.footer a.mobile,div.footer a.rss,div.footer a.follow,div.footer a.twitterlink,div.footer a.top,div.footer a.next,div.footer a.back {
-	background:url(http://static.tumblr.com/jw8fmba/18Tlj7lu3/footer.png);
-	height:39px;
-	margin: 0 2px;
-}
-div.footer a.archive,div.footer a.mobile,div.footer a.rss,div.footer a.follow,div.footer a.twitterlink {
-	float:left;
-	width: 30px;
-}
-div.footer a.top,div.footer a.next,div.footer a.back {
-	float:right;
-}
-div.footer a.archive {background-position: 0 0;}
-div.footer a.mobile {background-position: -29px 0;}
-div.footer a.rss {background-position: -58px 0;}
-div.footer a.follow {background-position: -87px 0;}
-div.footer a.twitterlink {background-position: -116px 0;}
-div.footer a.top {background-position: -182px 0; width:30px;}
-div.footer a.next {background-position: -210px 0; width:39px;}
-div.footer a.back {background-position: -144px 0; width:39px;}
 
+div.nav {
+	padding: 10px 0 ;
+	width: 125px;
+	height: 39px;
+}
+
+div.nav a.next, div.nav a.back {
+	height: 39px;
+	width: 41px;
+	background:url(http://web124.free.fr/tumblr.moustachu.net/img/nav-button-tranparent.png) no-repeat ;
+}
+
+div.nav a.next {
+	 float:left;
+	 background-position: 0 0;
+}
+
+div.nav a.back {
+	 float:right;
+	 background-position: -41px 0;
+}
 
 /* moustachu add on */
 /* let's try to fix to the audio flash problem ... */
@@ -606,6 +557,7 @@ div.footer a.back {background-position: -144px 0; width:39px;}
 </head>
 <body class="{Name}_tumblr">
 
+<!-- DO NOT REMOVE THIS BLOCK OR YOU WILL BREAK INFINITE SCROLL -->
 {block:Pagination}<ul style="display: none" class="pagination"><li>{block:NextPage}<a href="{NextPage}" class="pagination_nextlink">Next</a>{/block:NextPage}</li></ul>{/block:Pagination}
 
 <div class="wrap">
@@ -616,7 +568,7 @@ div.footer a.back {background-position: -144px 0; width:39px;}
 
 <div id="links">
 {block:IfShowRSSAndArchiveInSidebar}
-<h2><a href="{RSS}">{lang:Subscribe}</a></h2>
+<!-- <h2><a href="{RSS}">{lang:Subscribe}</a></h2> -->
 <h2><a href="/archive">{lang:Archive}</a></h2>
 {/block:IfShowRSSAndArchiveInSidebar}
 {block:AskEnabled}
@@ -634,22 +586,17 @@ div.footer a.back {background-position: -144px 0; width:39px;}
     <input id="field" type="text" name="q" placeholder="{lang:Search}" />
 </form>
 
-{block:Twitter}
-<div class="twitter">
-<div class="tweet">
-<p class="content"></p>
-<div class="arrow"></div>
+<div class="nav">
+	{block:PermalinkPagination}
+	{block:NextPost}<a href="{NextPost}" class="next"></a>{/block:NextPost}
+	{block:PreviousPost}<a href="{PreviousPost}" class="back"></a>{/block:PreviousPost}
+	{/block:PermalinkPagination}
 </div>
-
-<a href="https://twitter.com/{TwitterUsername}" class="twitter-follow-button" data-button="grey" data-text-color="#FFFFFF" data-link-color="#00AEFF">Follow</a>
-</div>
-{/block:Twitter}
-
-<p>&nbsp;</p>
 
 </div>
 
 <div class="posts">
+
 {block:Posts}
 
 <div class="post">
@@ -768,7 +715,7 @@ div.footer a.back {background-position: -144px 0; width:39px;}
 <div class="photoset_bg">
 {block:IndexPage}{Photoset-250}{/block:IndexPage}{block:PermalinkPage}{Photoset-500}{/block:PermalinkPage}
 </div>
-<div class="post_body">
+<div class="post_body {block:Caption}has_{/block:Caption}caption">
 {block:Caption}{Caption}{/block:Caption}
 {block:Date}
 <div class="post_tools">
@@ -821,14 +768,19 @@ div.footer a.back {background-position: -144px 0; width:39px;}
 {block:IndexPage}
 <div id="info">
 <div id="holder">
-{LinkOpenTag}{DayOfMonth}{DayOfMonthSuffix}<br />
-{Month}<br />{LinkCloseTag}
+<a href="{Permalink}">{DayOfMonth}{DayOfMonthSuffix}<br />
+{Month}<br /></a>
 <a href="{Permalink}">{NoteCountWithLabel}</a><br />
 <a href="{ReblogURL}">Reblog</a>
 </div>
 </div>
 {/block:IndexPage}
-<img src="{block:IndexPage}{PhotoURL-250}{/block:IndexPage}{block:PermalinkPage}{PhotoURL-500}{/block:PermalinkPage}" alt="{PhotoAlt}" />
+{block:IndexPage}
+<img src="{PhotoURL-250}" alt="{PhotoAlt}" />
+{/block:IndexPage}
+{block:PermalinkPage}
+{LinkOpenTag}<img src="{PhotoURL-500}" alt="{PhotoAlt}" />{LinkCloseTag}
+{/block:PermalinkPage}
 </div>
 <div class="post_body {block:Caption}has_{/block:Caption}caption">
 {block:Caption}{Caption}{/block:Caption}
@@ -856,21 +808,9 @@ div.footer a.back {background-position: -144px 0; width:39px;}
 {/block:Posts}
 </div>
 
-<div class="footer">
-<a href="/archive" class="archive" title="{lang:Archive}"></a>
-<a href="/mobile" class="mobile" title="{lang:Mobile}"></a>
-<a href="{RSS}" class="rss" title="{lang:Subscribe to RSS}"></a>
-<a href="http://www.tumblr.com/follow/{Name}" class="follow" title="{lang:Follow}"></a>
-{block:Twitter}<a href="http://www.twitter.com/{TwitterUsername}" class="twitterlink" title="@{TwitterUsername}"></a>{/block:Twitter}
-{block:IfNotInfiniteScroll}{block:Pagination}{block:NextPage}<a href="{NextPage}" class="next" title="{lang:Next page}"></a>
-{/block:NextPage}
-<a href="#tumblr_controls" class="top scroll"></a>
-{block:PreviousPage}<a href="{PreviousPage}" class="back" title="{lang:Previous page}"></a>{/block:PreviousPage}
-{/block:Pagination}{/block:IfNotInfiniteScroll}
-</div>
+
 </div>
 
-<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
 {block:IndexPage}
 <script type="text/javascript">
 $(function(){
@@ -918,13 +858,6 @@ $(function(){
 			});
 		});
 });
-
-{block:Twitter}
-$.getJSON("http://twitter.com/statuses/user_timeline/{TwitterUsername}.json?callback=?", function(data) {
-     $(".twitter .tweet .content").html(data[0].text);
-});
-{/block:Twitter}
-
 
 </script>
 {/block:IndexPage}
